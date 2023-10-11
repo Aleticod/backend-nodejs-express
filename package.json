@@ -1,0 +1,14 @@
+{
+  "name": "backend-nodejs-express",
+  "version": "1.0.0",
+  "description": "API REST and Express",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "lint": "eslint"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
