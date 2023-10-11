@@ -9,6 +9,6 @@
     "jest": true
   },
   "rules": {
-    "no-console": "warm"
+    "no-console": "warn"
   }
 }
