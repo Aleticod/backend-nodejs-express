@@ -19,7 +19,14 @@ class ProductsService {
   }
   // Create a CRUD
   // CREATE
-  create() {}
+  create(data) {
+    const newProduct = {
+      id: faker.string.uuid(),
+      ...data,
+    };
+    this.products.push(newProduct);
+    return newProduct;
+  }
 
   // READ
   find() {
@@ -27,14 +34,34 @@ class ProductsService {
   }
 
   findOne(id) {
-    return this.products.find(item => item.id === id);
+    return this.products.find((item) => item.id === id);
   }
 
   // UPDATE
-  update() {}
+  update(id, data) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('Product not found');
+    } else {
+      const product = this.products[index];
+      this.products[index] = {
+        ...product,
+        ...data,
+      };
+    }
+    return this.products[index];
+  }
 
   // DELETE
-  delete() {}
+  delete(id) {
+    const index = this.products.findIndex((item) => item.id === id);
+    if (index === -1) {
+      throw new Error('Product no found');
+    } else {
+      this.products.splice(index, 1);
+    }
+    return { id };
+  }
 }
 
 module.exports = ProductsService;
