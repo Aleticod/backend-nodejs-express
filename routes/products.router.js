@@ -1,18 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+const ProductsService = require('../services/products.service')
+
+const service = new ProductsService();
+
 // Rout-> '/products'
 router.get('/', (req, res) => {
-  const products = [
-    {
-      name: 'Product 1',
-      price: 100,
-    },
-    {
-      name: 'Product 2',
-      prince: 200,
-    },
-  ];
+  const products = service.find();
   res.json(products);
 });
 
@@ -22,19 +17,8 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  if (id === '999') {
-    res.status(404);
-    res.json({
-      message: 'Not found',
-    });
-  } else {
-    res.status(200);
-    res.json({
-      id,
-      name: 'Product 3',
-      price: 300,
-    });
-  }
+  const product = service.findOne(id);
+  res.json(product)
 });
 
 router.post('/', (req, res) => {
