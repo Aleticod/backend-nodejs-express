@@ -22,15 +22,24 @@ router.get('/filter', (req, res) => {
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'Product 3',
-    price: 300,
-  });
+  if (id === '999') {
+    res.status(404);
+    res.json({
+      message: 'Not found',
+    });
+  } else {
+    res.status(200);
+    res.json({
+      id,
+      name: 'Product 3',
+      price: 300,
+    });
+  }
 });
 
 router.post('/', (req, res) => {
   const body = req.body;
+  res.status(201);
   res.json({
     message: 'Created',
     data: body,
@@ -61,7 +70,7 @@ router.delete('/:id', (req, res) => {
   const { id } = req.params;
   res.json({
     message: 'Deleted',
-    id
+    id,
   });
 });
 
