@@ -7,6 +7,9 @@ app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
+// Recieve json with posst
+app.use(express.json());
+
 routerAPI(app);
 
 // app.get('/categories/:categoryId/products/:productId', (req, res) => {
