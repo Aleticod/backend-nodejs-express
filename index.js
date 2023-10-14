@@ -1,5 +1,6 @@
 const express = require('express');
 const routerAPI = require('./routes/index');
+const { logErrors, errorHandler } = require('./middlewares/error.handler');
 const app = express();
 const port = 3000;
 
@@ -10,6 +11,7 @@ app.get('/', (req, res) => {
 // Recieve json with posst
 app.use(express.json());
 
+// App use routing
 routerAPI(app);
 
 // app.get('/categories/:categoryId/products/:productId', (req, res) => {
@@ -31,6 +33,10 @@ routerAPI(app);
 //     res.send('No hay parametros');
 //   }
 // });
+
+// App use a middlewares
+app.use(logErrors);
+app.use(errorHandler);
 
 app.listen(port, () => {
   console.log('Mi port es ' + port);
