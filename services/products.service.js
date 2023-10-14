@@ -19,7 +19,7 @@ class ProductsService {
   }
   // Create a CRUD
   // CREATE
-  create(data) {
+  async create(data) {
     const newProduct = {
       id: faker.string.uuid(),
       ...data,
@@ -29,16 +29,16 @@ class ProductsService {
   }
 
   // READ
-  find() {
+  async find() {
     return this.products;
   }
 
-  findOne(id) {
+  async findOne(id) {
     return this.products.find((item) => item.id === id);
   }
 
   // UPDATE
-  update(id, data) {
+  async update(id, data) {
     const index = this.products.findIndex((item) => item.id === id);
     if (index === -1) {
       throw new Error('Product not found');
@@ -53,7 +53,7 @@ class ProductsService {
   }
 
   // DELETE
-  delete(id) {
+  async delete(id) {
     const index = this.products.findIndex((item) => item.id === id);
     if (index === -1) {
       throw new Error('Product no found');
