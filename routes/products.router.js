@@ -35,24 +35,36 @@ router.post('/', async (req, res) => {
   });
 });
 
-router.patch('/:id', async (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const updatedProduct = await service.update(id, body);
-  res.json(updatedProduct);
+router.patch('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const updatedProduct = await service.update(id, body);
+    res.json(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.put('/:id', async (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const updatedProduct = await service.update(id, body);
-  res.json(updatedProduct);
+router.put('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const updatedProduct = await service.update(id, body);
+    res.json(updatedProduct);
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.delete('/:id', async (req, res) => {
-  const { id } = req.params;
-  const deletedProduct = await service.delete(id);
-  res.json(deletedProduct);
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const deletedProduct = await service.delete(id);
+    res.json(deletedProduct);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
