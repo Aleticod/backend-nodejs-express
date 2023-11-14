@@ -17,16 +17,23 @@ app.get('/', (req, res) => {
 app.use(express.json());
 
 // use CORS
-const whitelist = ['http://localhost:8080', 'https://myapp.com'];
+const whitelist = [
+  'http://localhost:8080',
+  'http://127.0.0.1:8080',
+  'https://myapp.com',
+  'http://127.0.0.1:3000',
+  'http://127.0.0.1:5500',
+];
 const options = {
   origin: (origin, callback) => {
-    if (whitelist.includes(origin)) {
-      callback(null, true)
+    // console.log(origin);
+    if (whitelist.includes(origin) || !origin) {
+      callback(null, true);
     } else {
-      callback(new Error('No permitido'))
+      callback(new Error('No permitido'));
     }
-  }
-}
+  },
+};
 app.use(cors(options));
 
 // App use routing
