@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const routerAPI = require('./routes/index');
 const {
   logErrors,
@@ -14,6 +15,19 @@ app.get('/', (req, res) => {
 
 // Recieve json with posst
 app.use(express.json());
+
+// use CORS
+const whitelist = ['http://localhost:8080', 'https://myapp.com'];
+const options = {
+  origin: (origin, callback) => {
+    if (whitelist.includes(origin)) {
+      callback(null, true)
+    } else {
+      callback(new Error('No permitido'))
+    }
+  }
+}
+app.use(cors(options));
 
 // App use routing
 routerAPI(app);
